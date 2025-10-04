@@ -16,7 +16,7 @@ Click boxes to reveal hidden points. Max achievable score is **500/600**, but ta
 
 ---
 
-## 🖼 Screenshots
+## 🖼 SnapShot
 
 **Game Board:**  
 ![Game Board](screenshots/game1.png)
@@ -32,8 +32,8 @@ Click boxes to reveal hidden points. Max achievable score is **500/600**, but ta
 
 1. Open the game in a browser.  
 2. Click all 9 boxes to reveal scores.  
-3. Aim for the **maximum score of 500**.  
-4. Links open in a new tab when clicked.  
+3. Aim for the **maximum score of 600**.  
+4. Google gemini link open in a new tab when clicked.  
 5. Use **Shuffle** to randomize link positions.  
 6. Use **Reset** to start again.  
 
