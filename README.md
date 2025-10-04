@@ -19,13 +19,16 @@ Click boxes to reveal hidden points. Max achievable score is **500/600**, but ta
 ## 🖼 SnapShot
 
 **Game Board:**  
-![Game Board]("C:\Users\poorv\OneDrive\Pictures\Screenshots\Game.png.png")
+![Game Board]<img width="1883" height="830" alt="Game png" src="https://github.com/user-attachments/assets/bee89bbc-9765-446b-b76d-65b919cd4fdd" />
+
+
 
 **After Clicking Some Boxes:**  
-![Game Clicks]("C:\Users\poorv\OneDrive\Pictures\Screenshots\Game1.png.png")
+![Game Clicks]<img width="1816" height="835" alt="Game1 png" src="https://github.com/user-attachments/assets/47590412-15e0-4abc-99e7-73e0cf700f9f" />
+
 
 **Final Score Popup:**  
-![Final Score]("C:\Users\poorv\OneDrive\Pictures\Screenshots\Game2.png.png")
+![Final Score]<img width="955" height="949" alt="Game2 png" src="https://github.com/user-attachments/assets/8917336a-9d88-4401-8d54-1ad0659405fe" />
 
 
 ---
