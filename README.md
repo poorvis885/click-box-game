@@ -47,7 +47,7 @@ Click boxes to reveal hidden points. Max achievable score is **500/600**, but ta
 ## 🚀 Deployment
 
 - The game is live on GitHub Pages:  
-[Click Box Game](https://yourusername.github.io/click-box-game/)  
+[Click Box Game](https://poorvis885.github.io/click-box-game/)  
 
 ---
 
