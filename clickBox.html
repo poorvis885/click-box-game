@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Click Box Game (3x3)</title>
+  <style>
+    :root{ --size:110px }
+    body{ font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; background:radial-gradient(circle at center, #f7fbff, #c6e2ff); }
+    .container{ width:450px; max-width:95vw; text-align:center; padding:20px; border-radius:20px; background:linear-gradient(145deg,#ffffff,#d1e8ff); box-shadow:0 15px 30px rgba(0,0,0,0.2); }
+    h1{ margin:6px 0 12px; font-size:24px; color:#1f4eb2; text-shadow:1px 1px 2px #a8c4ff; }
+    .instructions{ font-size:15px; color:#374151; margin-bottom:15px; line-height:1.4; }
+    .meta{ display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:15px }
+    .score{ font-weight:700; font-size:20px; color:#1f4eb2; }
+    .controls{ display:flex; gap:10px }
+    button{ padding:10px 12px; border-radius:12px; border:0; background:#1f6feb; color:white; cursor:pointer; font-weight:700; box-shadow:0 6px 12px rgba(31,111,235,0.3); transition: transform .15s, box-shadow .15s; }
+    button:active{ transform:translateY(2px); box-shadow:0 3px 6px rgba(31,111,235,0.3); }
+    button.secondary{ background:#6b7280 }
+    .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; justify-items:center; }
+    .box{ width:var(--size); height:var(--size); background:linear-gradient(180deg,#fffae6,#fff3b3); border-radius:15px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:24px; cursor:pointer; user-select:none; box-shadow:0 8px 16px rgba(0,0,0,0.2); transition: transform .15s, box-shadow .15s, background .3s; }
+    .box:active{ transform:translateY(2px); box-shadow:0 4px 8px rgba(0,0,0,0.2); }
+    .box.disabled{ opacity:.5; cursor:not-allowed; background:linear-gradient(180deg,#d1d1d1,#b1b1b1); }
+    .message{ margin-top:15px; min-height:20px; font-size:16px; font-weight:600; color:#1f4eb2; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔥 Click Box Challenge 🔥</h1>
+    <div class="instructions">
+      Each box gives either <b>100 points</b> or <b>0 points</b>.<br>
+      Click all boxes to reveal their scores.<br>
+      Target score: <b>600</b> — try to reach the top! 🎯
+    </div>
+    <div class="meta">
+      <div class="score">Score: <span id="score">0</span> / 600</div>
+      <div class="controls">
+        <button id="shuffle">Shuffle</button>
+        <button id="reset" class="secondary">Reset</button>
+      </div>
+    </div>
+
+    <div class="grid" id="grid"></div>
+    <div class="message" id="message"></div>
+  </div>
+
+<script>
+(function(){
+  const GRID_SIZE = 9;
+  const LINKS_COUNT = 5;
+  const POINTS = 100;
+  const TARGET_SCORE = 600;
+
+  const savedLinks = [
+    "https://aiskillshouse.com/student/qr-mediator.html?uid=1770&promptId=17",
+    "https://aiskillshouse.com/student/qr-mediator.html?uid=1770&promptId=16",
+    "https://aiskillshouse.com/student/qr-mediator.html?uid=1770&promptId=15",
+    "https://aiskillshouse.com/student/qr-mediator.html?uid=1770&promptId=14",
+    "https://aiskillshouse.com/student/qr-mediator.html?uid=1770&promptId=13"
+  ];
+
+  const gridEl = document.getElementById('grid');
+  const scoreEl = document.getElementById('score');
+  const messageEl = document.getElementById('message');
+  const shuffleBtn = document.getElementById('shuffle');
+  const resetBtn = document.getElementById('reset');
+
+  let score = 0;
+  let assigned = Array(GRID_SIZE).fill(null);
+  let clicked = Array(GRID_SIZE).fill(false);
+  let totalClicks = 0;
+
+  function createGrid(){
+    gridEl.innerHTML = '';
+    for(let i=0;i<GRID_SIZE;i++){
+      const b = document.createElement('div');
+      b.className = 'box';
+      b.dataset.index = String(i);
+      b.textContent = '';
+      b.addEventListener('click', onBoxClick);
+      gridEl.appendChild(b);
+    }
+  }
+
+  function onBoxClick(e){
+    const idx = Number(e.currentTarget.dataset.index);
+    if(clicked[idx]) return;
+    clicked[idx] = true;
+    totalClicks++;
+    const info = assigned[idx];
+    const box = e.currentTarget;
+    box.classList.add('disabled');
+
+    if(info && info.url){
+      score += POINTS;
+      updateScore();
+      messageEl.textContent = `+${POINTS} points! 🔥`;
+      window.open(info.url, '_blank');
+      box.textContent = '💎';
+    } else {
+      messageEl.textContent = '0 points ❌';
+      box.textContent = '✖';
+    }
+
+    if(totalClicks === GRID_SIZE){
+      setTimeout(()=>{
+        alert(`Your final score: ${score} / ${TARGET_SCORE}\nBetter luck next time! to score 600 🎯`);
+      }, 300);
+    }
+  }
+
+  function updateScore(){
+    scoreEl.textContent = score;
+  }
+
+  function assignLinks(){
+    assigned = Array(GRID_SIZE).fill(null);
+    const indices = shuffle([...Array(GRID_SIZE).keys()]);
+    for(let i=0;i<LINKS_COUNT;i++){
+      const targetIdx = indices[i];
+      const url = savedLinks[i] || null;
+      assigned[targetIdx] = url ? {url} : null;
+    }
+    clicked = Array(GRID_SIZE).fill(false);
+    score = 0;
+    totalClicks = 0;
+    scoreEl.textContent = score;
+    messageEl.textContent = '';
+    updateBoxes();
+  }
+
+  function updateBoxes(){
+    const boxes = gridEl.querySelectorAll('.box');
+    boxes.forEach((b)=>{
+      b.classList.remove('disabled');
+      b.textContent = '';
+    });
+  }
+
+  function shuffle(arr){
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [a[i],a[j]] = [a[j],a[i]];
+    }
+    return a;
+  }
+
+  shuffleBtn.addEventListener('click', ()=>{
+    assignLinks();
+  });
+
+  resetBtn.addEventListener('click', ()=>{
+    assigned = Array(GRID_SIZE).fill(null);
+    clicked = Array(GRID_SIZE).fill(false);
+    totalClicks = 0;
+    score = 0;
+    scoreEl.textContent = score;
+    updateBoxes();
+    messageEl.textContent = '';
+  });
+
+  createGrid();
+  assignLinks();
+})();
+</script>
+</body>
+</html>
