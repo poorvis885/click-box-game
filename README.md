@@ -19,12 +19,14 @@ Click boxes to reveal hidden points. Max achievable score is **500/600**, but ta
 ## 🖼 SnapShot
 
 **Game Board:**  
-![Game Board](screenshots/game1.png)
+![Game Board]("C:\Users\poorv\OneDrive\Pictures\Screenshots\Game.png.png")
 
-**After Clicking Boxes:**  
-![Game Score](screenshots/game2.png)
+**After Clicking Some Boxes:**  
+![Game Clicks]("C:\Users\poorv\OneDrive\Pictures\Screenshots\Game1.png.png")
 
-> ⚠️ Replace `screenshots/game1.png` and `screenshots/game2.png` with your actual screenshot file paths.
+**Final Score Popup:**  
+![Final Score]("C:\Users\poorv\OneDrive\Pictures\Screenshots\Game2.png.png")
+
 
 ---
 
