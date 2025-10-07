@@ -1,7 +1,7 @@
 # 🔥 Click Box Challenge 🔥
 
 A fun **3x3 click game** built with HTML, CSS, and JavaScript.  
-Click boxes to reveal hidden points. Max achievable score is **500/600**, but target displayed is **600** to challenge the player!  
+Click boxes to reveal hidden points. Max achievable score is **500/600**, but target is **600** to challenge the player!  
 
 ---
 
